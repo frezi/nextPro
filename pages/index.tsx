@@ -10,17 +10,12 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+        <h1 className={styles.title}>跟着文档 coding</h1>
 
-        <p className={styles.description}>
-          Get started by editing{" "}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
+        <p className={styles.description}>go</p>
       </main>
 
-      <footer className={styles.footer}>111</footer>
+      <footer className={styles.footer}>end</footer>
     </div>
   );
 }
