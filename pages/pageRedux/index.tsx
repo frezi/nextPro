@@ -1,11 +1,8 @@
 import styles from "./index.module.scss";
 import { useEffect } from "react";
-// import axios from "axios";
 
 export default ({ blogs }) => {
-  //test ts安装是否成功
-  let gg: string = "ff";
-  gg = "123";
+
 
   // //test api路由
   // useEffect(() => {
