@@ -1,5 +1,5 @@
 import styles from './index.module.scss'
-import { useEffect } from 'react'
+import { useState, useEffect } from 'react'
 // import axios from "axios";
 
 export default ({ blogs }) => {
