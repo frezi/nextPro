@@ -1,5 +1,8 @@
 import styles from './index.module.scss'
-import { useEffect } from 'react'
+import { useCallback, useEffect, useReducer } from 'react'
+import reducer, { initState } from '../../reduxs/reducer'
+import { getUserInfo, changeUserInfo } from '../../reduxs/actions'
+import Link from 'next/link'
 
 export default ({ blogs }) => {
 	// //test api路由
@@ -8,10 +11,24 @@ export default ({ blogs }) => {
 	//   console.log(data, 123);
 	// }, []);
 
+	const [state, dispatch] = useReducer(reducer, initState)
+
+	const handleChangeInfo = useCallback(() => {
+		console.log(dispatch, state.userInfo.mobile, 1212)
+		dispatch(changeUserInfo('mobile', state.userInfo.mobile + 1))
+	}, [state.userInfo.mobile])
+
 	return (
 		<div>
-			<p className={styles.titleRed}>{blogs.title}</p>
-			<p className={styles.titleRed}>{blogs.title}</p>
+			<p className={styles.titleRed}>{state.userInfo.mobile}</p>
+			<p className={styles.titleRed} onClick={handleChangeInfo}>
+				{/* {blogs.title} */}
+				点击我改变手机号码
+			</p>
+			<Link href={`/pageReduxData`}>
+				{/* {blogs.title} */}
+				去到另外页面访问redux
+			</Link>
 		</div>
 	)
 }
