@@ -1,62 +1,41 @@
 import styles from './index.module.scss'
-import { useCallback, useEffect, useReducer } from 'react'
-import reducer, { initState } from '../../reduxs/reducer'
+import { useCallback, useReducer } from 'react'
+import reducer, { initState, IStoreState } from '../../reduxs/reducer'
 import { getUserInfo, changeUserInfo } from '../../reduxs/actions'
 import Link from 'next/link'
+import { useSelector, useDispatch } from 'react-redux'
+import { store } from '../../reduxs'
+export default () => {
+	//1、useReducer中dispatch不会subcreibe监听变化 无法全局共享
+	// const [state] = useReducer(reducer, store.getState())
+	// const { mobile } = state.userInfo
 
-export default ({ blogs }) => {
-	// //test api路由
-	// useEffect(() => {
-	//   const data = axios.get("./api/hello.js");
-	//   console.log(data, 123);
-	// }, []);
-
-	const [state, dispatch] = useReducer(reducer, initState)
-
+	const mobile = useSelector<IStoreState, number>((state) => {
+		return state.userInfo.mobile
+	})
+	const dispatch = useDispatch()
 	const handleChangeInfo = useCallback(() => {
-		console.log(dispatch, state.userInfo.mobile, 1212)
-		dispatch(changeUserInfo('mobile', state.userInfo.mobile + 1))
-	}, [state.userInfo.mobile])
+		// console.log(dispatch, state.userInfo.mobile, 1212)
+		dispatch(changeUserInfo('mobile', mobile + 1))
+	}, [mobile])
+	//2、很多百度文档写useCallback函数第二个参数在这里传dispatch，其实若传dispatch，只会在更新一次，如果是layout层这种只需要一次更新是用[dispatch]
+	//这里结合语境 应该是mobile更改时调用记忆函数
 
 	return (
 		<div>
-			<p className={styles.titleRed}>{state.userInfo.mobile}</p>
-			<p className={styles.titleRed} onClick={handleChangeInfo}>
-				{/* {blogs.title} */}
-				点击我改变手机号码
-			</p>
-			<Link href={`/pageReduxData`}>
-				{/* {blogs.title} */}
-				去到另外页面访问redux
-			</Link>
+			<p className={styles.titleRed}>{mobile}</p>
+			<div>
+				<button className={styles.titleRed} onClick={handleChangeInfo}>
+					点击我改变手机号码
+				</button>
+			</div>
+
+			<Link href={`/pageReduxData`}>去到另外页面访问redux</Link>
 		</div>
 	)
 }
 
-//静态生成 带数据（next build）
-// export const getStaticProps = async () => {
-//   return {
-//     props: {
-//       blogs: {
-//         title: "getStaticProps",
-//       },
-//     },
-//   };
-// };
-
-//SSR 带数据 （外部API数据）
-export const getServerSideProps = async ({ query }) => {
-	console.log(query, 'params')
-
-	return {
-		props: {
-			blogs: {
-				title: 'getServerSideProps',
-			},
-		},
-	}
-}
-//createStore函数
+//3、createStore函数
 const listener = {} //触发重新渲染函数render或setState函数
 const createStore = (reducer: (s: any, a: any) => Object) => {
 	//默认
