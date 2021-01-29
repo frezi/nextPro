@@ -1,0 +1,39 @@
+.pageCssScroll {
+	.first {
+		box-sizing: border-box;
+		.bg {
+			position: relative;
+			padding-top: 64%;
+			overflow: hidden;
+			> img {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				display: block;
+				height: auto;
+			}
+		}
+	}
+	.second {
+		box-sizing: border-box;
+		background-color: #16215c;
+		.inner {
+			padding: 300px 150px;
+			display: flex;
+			justify-content: space-around;
+			// align-items: center;
+			text-align: left;
+			color: #fff;
+			.left {
+				font-size: 20px;
+				flex: 1;
+			}
+			.right {
+				font-size: 40px;
+				flex: 1.5;
+				margin-left: 100px;
+			}
+		}
+	}
+}
