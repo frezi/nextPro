@@ -1,6 +1,6 @@
 import styles from './index.module.scss'
 import { useState, useEffect, useRef } from 'react'
-import { useDebounceFn } from 'ahooks'
+import { useDebounceFn, useScroll, useEventListener } from 'ahooks'
 
 //stage1 UI css（current选择器）
 //stage2 js onscroll监测 定时器
@@ -11,10 +11,16 @@ export default () => {
 
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
+
 		return () => {
 			window.removeEventListener('scroll', handleScroll)
 		}
 	})
+
+	// useScroll(firstRef, () => {
+	// 	alert(1)
+	// 	return true
+	// })
 
 	const { run: handleScroll } = useDebounceFn(
 		() => {
@@ -36,19 +42,22 @@ export default () => {
 					document.body.clientHeight
 				)
 
-			// first 高度
+			// 首屏第一个特效盒子 高度
 			const firstHeight = Math.min(firstRef.current.offsetHeight)
 
-			console.log(scrollTop, clientHeight, firstHeight, scrollHeight)
+			console.log(firstRef.current.classList, 999)
 
-			// 停留在第一部分 所有移除current 自己加current
+			// 停留在第一部分 所有移除current 自己加current //已经有current属性不执行
 			if (scrollTop < firstHeight) {
-				//已经有current属性不执行
-				alert('展示第1部分啦')
+				// alert('展示第1部分啦')
+				if (!firstRef.current.classList.contains('current')) {
+					firstRef.current.classList.add('current')
+				}
+			} else {
+				firstRef.current.classList.remove('current')
 			}
-			// 停留在第二部分
 		},
-		{ wait: 100 }
+		{ wait: 300 }
 	)
 
 	return (
