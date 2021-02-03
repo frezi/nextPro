@@ -10,6 +10,7 @@
   "dependencies": {
     "ahooks": "^2.9.4",
     "antd-dayjs-webpack-plugin": "^1.0.6",
+    "classname": "^0.0.0",
     "fork-ts-checker-webpack-plugin": "^6.1.0",
     "next": "10.0.4",
     "next-images": "^1.7.0",

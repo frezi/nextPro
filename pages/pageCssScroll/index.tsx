@@ -1,17 +1,31 @@
 import styles from './index.module.scss'
 import { useState, useEffect, useRef } from 'react'
 import { useDebounceFn, useScroll, useEventListener } from 'ahooks'
+import cln from 'classname'
 
 //stage1 UI css（current选择器）
 //stage2 js onscroll监测 定时器
 //stage3 微调效果
 
 export default () => {
-	const firstRef = useRef()
+	const [flag, setFlag] = useState(false)
+	const [flagFirst, setFlagFirst] = useState(false)
+	//初始化
+	useEffect(() => {
+		window.scrollTo(0, 0)
+		let topTimer = setTimeout(() => {
+			setFlag(true)
+			setFlagFirst(true)
+		}, 30)
+		return () => {
+			clearTimeout(topTimer)
+		}
+	}, [])
 
+	//滚动监测动态变化 ====
+	const firstRef = useRef()
 	useEffect(() => {
 		window.addEventListener('scroll', handleScroll)
-
 		return () => {
 			window.removeEventListener('scroll', handleScroll)
 		}
@@ -45,16 +59,19 @@ export default () => {
 			// 首屏第一个特效盒子 高度
 			const firstHeight = Math.min(firstRef.current.offsetHeight)
 
-			console.log(firstRef.current.classList, 999)
+			console.log(scrollTop > firstHeight, 999)
 
-			// 停留在第一部分 所有移除current 自己加current //已经有current属性不执行
-			if (scrollTop < firstHeight) {
-				// alert('展示第1部分啦')
-				if (!firstRef.current.classList.contains('current')) {
-					firstRef.current.classList.add('current')
-				}
+			// 停留在第一部分 移除current 自己加current //已经有current属性不执行
+			if (scrollTop > firstHeight) {
+				// flagFirst && setFlagFirst(false)
 			} else {
-				firstRef.current.classList.remove('current')
+				// alert('展示第1部分啦')
+				!flagFirst && setFlagFirst(true)
+				// if (!firstRef.current.classList.contains('current')) {
+				// 	let topTimer = setTimeout(() => {
+				// 		setFlagFirst(true)
+				// 	}, 0)
+				// }
 			}
 		},
 		{ wait: 300 }
@@ -62,12 +79,32 @@ export default () => {
 
 	return (
 		<div className={styles.pageCssScroll}>
-			<section className={styles.first} ref={firstRef}>
+			<div className={cln(styles.gobg, flag && styles.gobgno)}></div>
+			<section
+				className={cln(styles.first, flagFirst && styles.current)}
+				ref={firstRef}
+			>
 				<div className={styles.bg}>
-					<img src={require('@/assets/4_new.png')} alt="" />
-					<img src={require('@/assets/3_new.png')} alt="" />
-					<img src={require('@/assets/2_new.png')} alt="" />
-					<img src={require('@/assets/1_new.png')} alt="" />
+					<img
+						className={cln(styles.cloud, styles.cloudgo)}
+						src={require('@/assets/4_new.png')}
+						alt=""
+					/>
+					<img
+						className={cln(styles.wall, styles.wallgo)}
+						src={require('@/assets/3_new.png')}
+						alt=""
+					/>
+					<img
+						className={cln(styles.car, styles.cargo)}
+						src={require('@/assets/2_new.png')}
+						alt=""
+					/>
+					<img
+						className={cln(styles.tree, styles.treego)}
+						src={require('@/assets/1_new.png')}
+						alt=""
+					/>
 				</div>
 				<div className={styles.text}></div>
 			</section>

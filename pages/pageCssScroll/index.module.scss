@@ -1,10 +1,32 @@
 .pageCssScroll {
+	overflow: hidden;
+	.gobg {
+		position: relative;
+		top: 0;
+		left: 50%;
+		z-index: 99;
+		width: 2000px;
+		background-color: #16215c;
+		transform: translate(-50%, 1500px) scaleY(1);
+		border-radius: 0%;
+		height: 1500px;
+	}
+	.gobgno {
+		transform: translate(-50%, 3000px) scaleY(1.8);
+		border-radius: 40%;
+		left: 50%;
+		height: 0px;
+		transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1),
+			border-radius 0.8s cubic-bezier(0.645, 0.045, 0.355, 1),
+			height 0.5s ease 1s;
+	}
 	.first {
 		box-sizing: border-box;
+		position: relative;
+		padding-top: 64%;
+		overflow: hidden;
 		.bg {
 			position: relative;
-			padding-top: 64%;
-			overflow: hidden;
 			> img {
 				position: absolute;
 				bottom: 0;
@@ -13,11 +35,48 @@
 				display: block;
 				height: auto;
 			}
+			.cloud {
+				transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+				transform: translate3d(0, 100px, 100px);
+			}
+			.wall {
+				transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+				transform: translate3d(100px, 0px, -100px) scale(0.8, 0.8);
+			}
+
+			.car {
+				transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
+				transform: translate3d(0px, 150px, -100px) scale(1.2, 1.5);
+			}
+
+			.tree {
+				transition: transform 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+				transform: translate3d(0px, 200px, -150px) scale(1.1, 1.1);
+			}
+		}
+	}
+	.current {
+		.bg {
+			.cloudgo {
+				transform: translate3d(0px, 0, 0px);
+			}
+			.wallgo {
+				transform: translate3d(0px, 0, 0px) scale(1, 1);
+			}
+
+			.cargo {
+				transform: translate3d(0px, 0, 0px) scale(1, 1);
+			}
+
+			.treego {
+				transform: translate3d(0px, 0, 0px) scale(1, 1);
+			}
 		}
 	}
 	.second {
 		box-sizing: border-box;
 		background-color: #16215c;
+		margin-top: -2px;
 		.inner {
 			padding: 300px 150px;
 			display: flex;
