@@ -24,37 +24,13 @@ export default () => {
 
 	//滚动监测动态变化 ====
 	const firstRef = useRef()
-	useEffect(() => {
-		window.addEventListener('scroll', handleScroll)
-		return () => {
-			window.removeEventListener('scroll', handleScroll)
-		}
-	})
-
-	// useScroll(firstRef, () => {
-	// 	alert(1)
-	// 	return true
-	// })
-
 	const { run: handleScroll } = useDebounceFn(
 		() => {
-			//文档内容实际高度（包括超出视窗的溢出部分）
-			var scrollHeight = Math.max(
-				document.documentElement.scrollHeight,
-				document.body.scrollHeight
-			)
 			//滚动条滚动距离
 			var scrollTop =
 				window.pageYOffset ||
 				document.documentElement.scrollTop ||
 				document.body.scrollTop
-			//窗口可视范围高度
-			var clientHeight =
-				window.innerHeight ||
-				Math.min(
-					document.documentElement.clientHeight,
-					document.body.clientHeight
-				)
 
 			// 首屏第一个特效盒子 高度
 			const firstHeight = Math.min(firstRef.current.offsetHeight)
@@ -62,8 +38,9 @@ export default () => {
 			console.log(scrollTop > firstHeight, 999)
 
 			// 停留在第一部分 移除current 自己加current //已经有current属性不执行
-			if (scrollTop > firstHeight) {
+			if (scrollTop < firstHeight) {
 				// flagFirst && setFlagFirst(false)
+				alert(1)
 			} else {
 				// alert('展示第1部分啦')
 				!flagFirst && setFlagFirst(true)
@@ -76,6 +53,7 @@ export default () => {
 		},
 		{ wait: 300 }
 	)
+	// useEventListener('scroll', handleScroll)
 
 	return (
 		<div className={styles.pageCssScroll}>

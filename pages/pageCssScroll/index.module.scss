@@ -13,12 +13,12 @@
 	}
 	.gobgno {
 		transform: translate(-50%, 3000px) scaleY(1.8);
-		border-radius: 40%;
+		border-radius: 60%;
 		left: 50%;
 		height: 0px;
 		transition: transform 1s cubic-bezier(0.645, 0.045, 0.355, 1),
 			border-radius 0.8s cubic-bezier(0.645, 0.045, 0.355, 1),
-			height 0.5s ease 1s;
+			height 0.1s ease 1.5s;
 	}
 	.first {
 		box-sizing: border-box;
@@ -50,7 +50,7 @@
 			}
 
 			.tree {
-				transition: transform 2s cubic-bezier(0.645, 0.045, 0.355, 1);
+				transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1);
 				transform: translate3d(0px, 200px, -150px) scale(1.1, 1.1);
 			}
 		}
