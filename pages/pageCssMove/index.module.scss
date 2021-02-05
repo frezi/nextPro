@@ -117,27 +117,7 @@
 			}
 		}
 	}
-	.secondBox {
-		margin-top: 200px;
-		margin-bottom: 600px;
-		.second {
-			width: 5px;
-			height: 200px;
-			margin: 50px auto;
-			background-color: #000;
-			border-radius: 50% 50% 0 0;
-			transform-origin: center bottom;
-			animation: rotS 60s steps(60) infinite;
-		}
-	}
 
-	@keyframes rotS {
-		0% {
-		}
-		100% {
-			transform: rotate(360deg);
-		}
-	}
 	.pkBox {
 		width: 310px;
 		height: 441px;
