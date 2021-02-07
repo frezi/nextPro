@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import ReactFullpage from '@fullpage/react-fullpage'
-import cln from 'classname'
+import cln from 'classnames'
 import styles from './index.module.scss'
 
 const anchors = ['firstPage', 'secondPage', 'thirdPage']
