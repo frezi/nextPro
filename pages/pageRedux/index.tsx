@@ -16,7 +16,20 @@ export default () => {
 	const dispatch = useDispatch()
 	const handleChangeInfo = useCallback(() => {
 		// console.log(dispatch, state.userInfo.mobile, 1212)
+		console.time('time')
 		dispatch(changeUserInfo('mobile', mobile + 1))
+		const arr = new Array(10).fill('a')
+		for (var k in arr) {
+			setTimeout(() => {
+				console.log(k, 'var')
+			}, 100)
+		}
+		for (let k in arr) {
+			setTimeout(() => {
+				console.log(k, 'let')
+			}, 100)
+		}
+		console.timeEnd('time')
 	}, [mobile])
 	//2、很多百度文档写useCallback函数第二个参数在这里传dispatch，其实若传dispatch，只会在更新一次，如果是layout层这种只需要一次更新是用[dispatch]
 	//这里结合语境 应该是mobile更改时调用记忆函数
