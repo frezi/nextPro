@@ -5,6 +5,7 @@ import { getUserInfo, changeUserInfo } from '../../reduxs/actions'
 import Link from 'next/link'
 import { useSelector, useDispatch } from 'react-redux'
 import { store } from '../../reduxs'
+
 export default () => {
 	//1、useReducer中dispatch不会subcreibe监听变化 无法全局共享
 	// const [state] = useReducer(reducer, store.getState())
@@ -14,6 +15,7 @@ export default () => {
 		return state.userInfo.mobile
 	})
 	const dispatch = useDispatch()
+
 	const handleChangeInfo = useCallback(() => {
 		// console.log(dispatch, state.userInfo.mobile, 1212)
 		console.time('time')
@@ -21,12 +23,12 @@ export default () => {
 		const arr = new Array(10).fill('a')
 		for (var k in arr) {
 			setTimeout(() => {
-				console.log(k, 'var')
+				console.log(k, 'var') //9 九次
 			}, 100)
 		}
 		for (let k in arr) {
 			setTimeout(() => {
-				console.log(k, 'let')
+				console.log(k, 'let') //0-9
 			}, 100)
 		}
 		console.timeEnd('time')

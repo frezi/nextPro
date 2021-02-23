@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactFullpage from '@fullpage/react-fullpage'
 import Head from 'next/head'
-import cln from 'classname'
+import cln from 'classnames'
 import styles from './index.module.scss'
 
 // import 'fullpage.js/vendors/scrolloverflow'; // Optional. When using scrollOverflow:true
 
-const originalColors = ['orange', 'blue', 'purple', 'yellow']
+const originalColors = ['orange', 'blue', 'purple', 'pink']
 
 class App extends React.Component<any, any> {
 	constructor(props) {
@@ -141,8 +141,8 @@ class App extends React.Component<any, any> {
 								<div
 									className={cln(
 										'section',
-										styles.second,
-										this.state.flagSecond && styles.current //====改变造成dom undefined
+										styles.second
+										// this.state.flagSecond && styles.current //====改变造成dom undefined
 									)}
 									id="second"
 								>
