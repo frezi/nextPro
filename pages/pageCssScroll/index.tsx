@@ -1,7 +1,7 @@
 import styles from './index.module.scss'
 import { useState, useEffect, useRef } from 'react'
 import { useDebounceFn, useScroll, useEventListener } from 'ahooks'
-import cln from 'classname'
+import cln from 'classnames'
 
 //stage1 UI css（current选择器）
 //stage2 js onscroll监测 定时器
